@@ -1,0 +1,19 @@
+use strict;
+use warnings;
+use bignum try => 'GMP';
+
+use lib 'lib';
+use lib 't/lib';
+
+use TestHelper;
+use Test::More;
+BEGIN { use_ok 'Factorial::Trivial' }
+
+subtest "Init and simple check" => 
+    \&TestHelper::simple_check, Factorial::Trivial->new();
+
+subtest "Check out some calculation results" =>
+    \&TestHelper::check_calculation_result, Factorial::Trivial->new();
+
+done_testing();
+exit(0);
