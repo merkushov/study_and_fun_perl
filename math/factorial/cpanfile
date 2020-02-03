@@ -1,0 +1,5 @@
+requires 'Inline';
+requires 'Inline::CPP';
+requires 'Math::BigInt::GMP';
+requires 'Benchmark';
+requires 'Test::More';
