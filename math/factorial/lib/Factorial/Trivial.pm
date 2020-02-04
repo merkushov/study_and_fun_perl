@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use bignum try => 'GMP';
 
-sub new { bless {}, shift }
+use base 'Factorial::Base';
 
 sub calculate {
     my ( $self, $num ) = @_;

@@ -5,12 +5,11 @@ package Factorial::TrivialCPP;
 use strict;
 use warnings;
 
+use base 'Factorial::Base';
 use Inline ( CPP => 'DATA' => 
     libs => [ '-lgmp', '-lgmpxx' ],
     ccflags => [ '-lgmp', '-lgmpxx' ],
 );
- 
-sub new { bless {}, shift }
 
 sub calculate {
     my ( $self, $num ) = @_;
