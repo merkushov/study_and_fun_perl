@@ -8,6 +8,7 @@ It is written to demonstrate some design examples, such as:
 * Using AutoTests (Test::More) and Performance Tests (Benchmark)
 * Integration of third-party code into Perl code (Inline::CPP)
 * Used the Multiple Precision Arithmetic Library (gmplib)
+* Memory leak check
 
 # Usage
 
@@ -23,8 +24,12 @@ For a laptop on an i3 processor, the result looks like this
 
 ```
                             Rate Tree (perl) Trivial+recursion (perl) Trivial (perl) Trivial (c++)
-Tree (perl)               7.92/s          --                     -87%           -93%         -100%
-Trivial+recursion (perl)  61.7/s        679%                       --           -49%         -100%
-Trivial (perl)             121/s       1433%                      97%             --          -99%
-Trivial (c++)            12618/s     159196%                   20341%         10289%            --
+Tree (perl)               6.97/s          --                     -88%           -94%         -100%
+Trivial+recursion (perl)  56.4/s        709%                       --           -50%         -100%
+Trivial (perl)             113/s       1522%                     100%             --          -99%
+Trivial (c++)            12500/s     179300%                   22063%         10963%            --
 ```
+
+# BUGS
+
+* `Factorial::TrivialCPP` have a memory leak

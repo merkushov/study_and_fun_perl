@@ -21,7 +21,7 @@ my $obj = Factorial->new();
 #         => sub{ $obj->type('tree')->calculate($num) },
 # });
 
-cmpthese( -10, {
+cmpthese( 1000, {
     "Trivial (c++)"     
         => sub{ $obj->type('trivial_cpp')->calculate($num) },
     "Trivial (perl)"

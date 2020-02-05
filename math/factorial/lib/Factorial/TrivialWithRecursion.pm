@@ -6,21 +6,17 @@ no warnings 'recursion';
 use bignum try => 'GMP';
 
 use base 'Factorial::Base';
+use Sub::Recursive;
 
 sub calculate {
-    my ( $self, $num ) = @_;
+    my $self = shift;
+    my $num = shift;
 
     return unless defined $num && $num >= 0;
-    return _recursive_computing( $num );
-}
 
-sub _recursive_computing {
-    if ( $_[0] == 0 ) {
-        return 1;
-    }
-    else {
-        return $_[0] * _recursive_computing( $_[0] - 1 );
-    }
+    # WARNING! A special call to a recursive function 
+    # (based on the Sub::Recursive module) to avoid memory leaks
+    return recursive { $_[0] <= 1 ? 1 : $_[0] * $REC->($_[0] - 1) }->($num)
 }
 
 1;
