@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use Data::Dumper;
 
 my %d = (
     '(' => ')',
@@ -10,25 +11,40 @@ my %d = (
 );
 my %dr = reverse %d;
 
-while ( my $str = <STDIN> ) {
-    chomp($str);
+sub validate_nested_brackets {
+    my $str = shift;
 
-    my @a = split //, $str;
-
-    last unless scalar @a;
+    return 0 unless $str;
 
     my @b = ();
-    while ( my $char = shift @a ) {
+    while ( my $char = substr( $str, 0, 1, '' ) ) {
         if ( $d{ $char } ) {
             push @b, $char;
         }
         elsif ( $dr{ $char } ) {
-            pop( @b ) if $b[-1] eq $dr{ $char };
+            if ( $b[-1] && $b[-1] eq $dr{ $char } ) {
+                pop( @b );
+            }
+            else {
+                return 0;
+            }
         }
     }
 
-    printf "%s\n", scalar( @b ) ? 'NO' : 'YES';
+    return scalar( @b ) ? 0 : 1;
 }
+
+if ( my $str = $ARGV[0] ) {
+    chomp($str);
+
+    printf "%s\n", validate_nested_brackets( $str ) ? 'YES' : 'NO';
+
+    exit(0);
+}
+
+# It is necessary here in order to use the script in autotests.
+# Do not do this in big software!
+1;
 
 =pod
 
@@ -47,9 +63,7 @@ A bracket is considered to be any one of the following characters: (, ), {, }, [
 
 =head1 USAGE
 
-    perl ./balanced_brackets.pl
-    or
-    cat input.dat | perl ./balanced_brackets.pl
+    perl ./balanced_brackets.pl "([])"
 
 =head1 AUTHOR
 
