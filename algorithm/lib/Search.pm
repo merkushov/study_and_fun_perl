@@ -5,6 +5,24 @@ use warnings;
 
 sub new { bless {}, shift }
 
+sub linear_search {
+    my ( $self, $array, $number ) = @_;
+
+    my $length = scalar( @{$array} );
+
+    for ( my $i = 0; $i < $length; $i++ ) {
+        if ( $array->[$i] == $number ) {
+            return $i;
+        }
+
+        if ( $array->[$i] > $number ) {
+            return;
+        }
+    }
+
+    return;
+}
+
 sub binary_search {
     my ( $self, $array, $number ) = @_;
 
