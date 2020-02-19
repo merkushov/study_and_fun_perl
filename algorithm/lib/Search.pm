@@ -18,7 +18,7 @@ sub binary_search {
             $l = $m + 1;
         }
         elsif ( $array->[$m] > $number ) {
-            $r = $m + 1;
+            $r = $m - 1;
         }
         else {
             return $m
