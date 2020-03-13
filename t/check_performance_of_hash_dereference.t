@@ -10,12 +10,12 @@ unless ( $ARGV[0] && $ARGV[0] eq 'manual' ) {
 
 our $NUM_1 = 0;
 our $NUM_2 = 0;
-our %hash = ( num => 2 );
+our %hash = ( num => 1 );
 
 sub stacked_sigils {
     my $hash = shift;
 
-    $NUM_1 = $$hash{'num'};
+    $NUM_1 += $$hash{'num'};
 
     return 1;
 }
@@ -23,7 +23,7 @@ sub stacked_sigils {
 sub arrow_notation {
     my $hash = shift;
 
-    $NUM_2 = $hash->{'num'};
+    $NUM_2 += $hash->{'num'};
 
     return 1;
 }
